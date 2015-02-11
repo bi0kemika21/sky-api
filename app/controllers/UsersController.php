@@ -225,6 +225,7 @@ class UsersController extends \BaseController {
                 $this->http_status = 200;
                 $this->response['results'] = 'Successfully logged in';
                 $this->response['api_token'] = $search->api_token;
+                $this->response['position'] = $search->position;
                 $this->response['status']= True;
 
             } else {
