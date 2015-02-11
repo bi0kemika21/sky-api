@@ -13,3 +13,5 @@
 
 Route::resource('users','UsersController');
 Route::resource('transactions','TransactionsController');
+Route::resource('items','ItemsController');
+Route::post('users/login', array('as' => 'user.login', 'uses' => 'UsersController@login'));
