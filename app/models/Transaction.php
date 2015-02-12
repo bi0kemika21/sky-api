@@ -30,8 +30,7 @@ class Transaction extends Eloquent implements UserInterface, RemindableInterface
             'purpose' => 'required|min:10|max:300',
             'item_id' => 'required', 
             'quantity'=>'required|between:1,3',
-            'location'=>'required|max:300',
-   			'status' => 'required'  
+            'location'=>'required|max:300'
         )
        ); 
 }
