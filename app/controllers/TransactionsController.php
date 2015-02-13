@@ -84,6 +84,15 @@ class TransactionsController extends \BaseController {
                         $post->item = "HD BOX";
                     }
     				$this->response['results'][] = $post;
+                    if($post->status=="1"){
+                        $post->stat = "Pending";
+                    }else if($post->status=="2"){
+                        $post->stat = "PR Checked";
+                    }else if($post->status=="3"){
+                        $post->stat = "Warehouse Checked";
+                    }else if($post->status=="0"){
+                        $post->stat = "Failed to Comply";
+                    }
     			}
     		} else {
     			$this->response['status'] = false;
