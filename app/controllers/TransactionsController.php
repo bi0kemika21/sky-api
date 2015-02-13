@@ -239,6 +239,39 @@ class TransactionsController extends \BaseController {
 	public function update($id)
 	{
 		//
+          if(Request::header('X-Auth-Token')) {
+            $token = Request::header('X-Auth-Token');
+
+            $search = User::where('api_token',$token)->first();
+
+            if(!$search) {
+                $this->response['status'] = false;
+                $this->response['error']['message'] = 'Invalid Token';
+
+                return Response::json($this->response,$this->http_status);
+            }
+            $transac = Transaction::find($id);
+            $transac->status = Input::get('status');
+            $transac->pr_status = Input::get('pr_status');
+
+                if($transac->save()) {
+                    $this->http_status = 200;
+                    $this->response['status'] = true;
+                    $this->response['message'] = 'User Successfully Updated';
+                } else {
+                    $this->response['status'] = false;
+                }
+
+                $this->response['results'] = $transac;
+        } else {
+            $this->http_status = 401;
+            $this->response['status'] = false;
+            $this->response['error']['message'] = 'Required Token';
+
+            return Response::json($this->response,$this->http_status);
+        }
+
+        return Response::json($this->response,$this->http_status);
 	}
 
 
