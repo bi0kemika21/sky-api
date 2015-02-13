@@ -241,7 +241,16 @@ class TransactionsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$transac = Transaction::find($id)->delete();
+        if( $transac ){            
+            $this->http_status = 200;        
+            $this->response['status'] = True;
+            $this->response['results']['message'] = "Successfully deleted Transaction"; 
+        }else{
+            $this->response['error']['record'][] = "Record not found";
+        }        
+    return Response::json($this->response,$this->http_status);
+
 	}
 
     public function getall(){
