@@ -16,3 +16,4 @@ Route::resource('transactions','TransactionsController');
 Route::resource('items','ItemsController');
 Route::post('users/login', array('as' => 'user.login', 'uses' => 'UsersController@login'));
 Route::get('transactionspr', array('as' => 'transactions.pr', 'uses' => 'TransactionsController@getpr'));
+Route::get('transactionswh', array('as' => 'transactions.wh', 'uses' => 'TransactionsController@getwh'));
