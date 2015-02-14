@@ -12,22 +12,23 @@ class CreateTransactionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('transactions', function(Blueprint $table)
-		{
-			//
-			$table->increments('id');
-            $table->integer('user_id')->unsigned()->index()->default(0);
-            $table->string('issued_to');
-            $table->string('pr_encoder');
-            $table->string('purpose');
-            $table->integer('item_id')->unsigned()->index()->default(0);
-            $table->string('quantity');
-            $table->string('location');
-            $table->string('status');
-            $table->string('pr_status');
-            $table->string('warehouse_status');                            
-            $table->timestamps();
-		});
+		// Schema::create('transactions', function(Blueprint $table)
+		// {
+		// 	//
+		// 	$table->increments('id');
+  //           $table->integer('user_id')->unsigned()->index()->default(0);
+  //           $table->string('issued_to');
+  //           $table->string('pr_encoder');
+  //           $table->string('purpose');
+  //           $table->integer('item_id')->unsigned()->index()->default(0);
+  //           $table->string('quantity');
+  //           $table->string('location');
+  //           $table->string('status');
+  //           $table->string('pr_status');
+  //           $table->string('warehouse_status');                            
+  //           $table->timestamps();
+		// });
+		Schema::drop('transactions');
 	}
 
 	/**
