@@ -253,6 +253,7 @@ class TransactionsController extends \BaseController {
             $transac = Transaction::find($id);
             $transac->status = Input::get('status');
             $transac->pr_status = Input::get('pr_status');
+            $transac->warehouse_status = Input::get('warehouse_status');
 
                 if($transac->save()) {
                     $this->http_status = 200;
