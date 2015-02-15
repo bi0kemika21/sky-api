@@ -470,5 +470,92 @@ class TransactionsController extends \BaseController {
         }
         return Response::json($this->response,$this->http_status);
     }
+    public function getall(){
+        //
+        if(Request::header('X-Auth-Token')) {
+            $token = Request::header('X-Auth-Token');
+
+            $search = User::where('api_token',$token)->first();
+
+            if(!$search) {
+                $this->response['status'] = false;
+                $this->response['error']['message'] = 'Invalid Token';
+                return Response::json($this->response,$this->http_status);
+            }
+            $posts = DB::table('transactions')->get();
+            if(!empty($posts)){
+                foreach ($posts as $post) {
+                    if($post->item_id==1){
+                        $post->item = "WITH MESS CABLE WIRE";
+                    }else if($post->item_id==2){
+                        $post->item = "NON MESS CABLE WIRE";
+                    }else if($post->item_id==3){
+                        $post->item = "F56 CABLE CONNECTOR";
+                    }else if($post->item_id==4){
+                        $post->item = "F59 CABLE CONNECTOR";
+                    }else if($post->item_id==5){
+                        $post->item = "F81 CABLE CONNECTOR";
+                    }else if($post->item_id==6){
+                        $post->item = "2 WAY SPITTER";
+                    }else if($post->item_id==7){
+                        $post->item = "P HOOK";
+                    }else if($post->item_id==8){
+                        $post->item = "S CLAMP";
+                    }else if($post->item_id==9){
+                        $post->item = "CABLE CLIP";
+                    }else if($post->item_id==10){
+                        $post->item = "GROUND WIRE";
+                    }else if($post->item_id==11){
+                        $post->item = "GROUND BLOCK";
+                    }else if($post->item_id==12){
+                        $post->item = "GROUND ROD";
+                    }else if($post->item_id==13){
+                        $post->item = "GROUND CLAMP";
+                    }else if($post->item_id==14){
+                        $post->item = "ISOLATOR";
+                    }else if($post->item_id==15){
+                        $post->item = "HIGH PASS FILTER";
+                    }else if($post->item_id==16){
+                        $post->item = "F 2 PAL";
+                    }else if($post->item_id==17){
+                        $post->item = "TUCKER WIRE";
+                    }else if($post->item_id==18){
+                        $post->item = "DIGI BOX";
+                    }else if($post->item_id==19){
+                        $post->item = "HD";
+                    }else if($post->item_id==20){
+                        $post->item = "MODEM";
+                    }else if($post->item_id==21){
+                        $post->item = "DIGI BOX";
+                    }else if($post->item_id==22){
+                        $post->item = "HD BOX";
+                    }else if($post->item_id==23){
+                        $post->item = "DIGI BOX";
+                    }else if($post->item_id==24){
+                        $post->item = "HD BOX";
+                    }
+                    $this->response['results'][] = $post;
+                    if($post->status=="1"){
+                        $post->stat = "Pending";
+                    }else if($post->status=="2"){
+                        $post->stat = "PR Checked";
+                    }else if($post->status=="3"){
+                        $post->stat = "Warehouse Checked";
+                    }else if($post->status=="4"){
+                        $post->stat = "Failed to Comply";
+                    }
+                }
+            } else {
+                $this->response['status'] = false;
+                $this->response['error']['message'] = 'No existing transaction';    
+            }
+            $this->response['status'] = True;
+        } else {
+            $this->http_status = 401;
+            $this->response['status'] = false;
+            $this->response['error']['message'] = 'Required Token';
+        }
+        return Response::json($this->response,$this->http_status);
+    }
 }
     
