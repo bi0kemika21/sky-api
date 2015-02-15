@@ -12,7 +12,6 @@ class CreateTransactionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::drop('transactions');
 		Schema::create('transactions', function(Blueprint $table)
 		{
 			//
