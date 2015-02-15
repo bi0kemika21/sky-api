@@ -134,10 +134,11 @@ class ItemsController extends \BaseController {
 	public function update($id)
 	{
 		//
-		if(Request::header('X-Auth-Token')) {
+		
+          if(Request::header('X-Auth-Token')) {
             $token = Request::header('X-Auth-Token');
 
-            $search = $this->user->where('api_token',$token)->first();
+            $search = User::where('api_token',$token)->first();
 
             if(!$search) {
                 $this->response['status'] = false;
@@ -145,46 +146,25 @@ class ItemsController extends \BaseController {
 
                 return Response::json($this->response,$this->http_status);
             }
-		    $userUpdateError = False;
-            $data = Input::all();
-            $this->item = Item::find($id);
-
-            if (Input::has('password')) {
-        	    $pw = Input::get('password');
-                if (Hash::check($pw, $this->user->password) ) {
-        		   $deduct = Input::get('deduct',0);
-        		   $this->item->stock = $this->item->stock - $deduct;
-            	   
-            	} else {
-            	    $this->response['status'] = False;
-                    $this->http_status = 403;
-                    $this->response['error']['password'][] = "Password incorrect";
-                    return Response::json($this->response, $this->http_status);
+            $item = Item::find($id);
+            $item->stocks = Input::get('stocks');
+                if($item->save()) {
+                    $this->http_status = 200;
+                    $this->response['status'] = true;
+                    $this->response['message'] = 'Item Stock Successfully Updated';
+                } else {
+                    $this->response['status'] = false;
                 }
-        	    try {
-            	    $this->item->save();
-            	    $this->response['results'] = $this->item->toArray();
-        	    } catch (PDOException $e) {
-            	   $userUpdateError = True;
-            	   $this->response['error'] = $e;
-        	       }
-        	    if (!$userUpdateError) {
-            	   $this->response['status'] = True;
-            	   $this->http_status = 200;
-            	   $this->response['results']['message'] = "Updated stock details";
-        	    }    
-            } else {
-        	    $this->response['status'] = False;
-                $this->http_status = 403;
-                $this->response['error']['password'][] = "Enter password ";
-            }
+
+                $this->response['results'] = $item;
         } else {
             $this->http_status = 401;
             $this->response['status'] = false;
             $this->response['error']['message'] = 'Required Token';
 
-        return Response::json($this->response,$this->http_status);
-		}
+            return Response::json($this->response,$this->http_status);
+        }
+
         return Response::json($this->response,$this->http_status);
 	}
 
