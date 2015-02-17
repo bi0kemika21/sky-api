@@ -60,7 +60,7 @@ class UsersController extends \BaseController {
             $this->user->last_name = Input::get('last_name','lastname');
             $this->user->contact_number = Input::get('contact_number','contact_number');
             $this->user->email = Input::get('email','email@example.com');
-            $this->user->birthday = date("Y-m-d", strtotime(Input::get('birthday',date("d-m-Y"))) );
+            $this->user->birthday = date("d-m-Y", strtotime(Input::get('birthday',date("d-m-Y"))) );
             $this->user->password = Hash::make(Input::get('password','password'));
             $this->user->api_token = $token;
             $this->user->position = Input::get('position');
@@ -165,8 +165,7 @@ class UsersController extends \BaseController {
             	   $this->user->last_name = Input::get('last_name',$this->user->lastname);
             	   $this->user->contact_number = Input::get('contact_number',$this->user->contact_number);
             	   $this->user->email = Input::get('email',$this->user->email);
-            	   $this->user->birthday = date("Y-m-d", strtotime(Input::get('birthday',$this->user->birthday) ));
-            	   $this->user->password = Hash::make(Input::get('new_password'));
+            	   $this->user->birthday = date("d-m-Y", strtotime(Input::get('birthday',$this->user->birthday)));
             	   $this->user->position = Input::get('position',$this->user->position);
                 }else{
             	    $this->response['status'] = False;

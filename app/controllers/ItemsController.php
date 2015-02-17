@@ -168,7 +168,7 @@ class ItemsController extends \BaseController {
         return Response::json($this->response,$this->http_status);
 	}
 
-
+    
 	/**
 	 * Remove the specified resource from storage.
 	 *
