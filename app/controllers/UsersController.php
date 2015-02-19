@@ -229,7 +229,7 @@ class UsersController extends \BaseController {
 
             } else {
                 $this->http_status = 401;
-                $this->response['error']['password'][] ="Invalid email or password.";
+                $this->response['error']['password'] ="Invalid email or password.";
             }
 
         } else {

@@ -31,11 +31,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         'store'=> array(
             'first_name'=>'required|min:2|max:35',
             'last_name'=>'required|min:2|max:35',
-            'contact_number' => 'required|min:10|max:10',
+            'contact_number' => 'required|min:11|max:11',
             'email' => 'required|max:35', 
             'password'=>'required|between:6,20',
             'birthday'=>'required|date',
    			'position' => 'required'  
-        )
+        ),
+        'update' => array(
+        	'old_password' =>'required'
+        	)
        ); 
 }
