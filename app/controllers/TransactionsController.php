@@ -258,7 +258,7 @@ class TransactionsController extends \BaseController {
                 if($transac->save()) {
                     $this->http_status = 200;
                     $this->response['status'] = true;
-                    $this->response['message'] = 'User Successfully Updated';
+                    $this->response['message'] = 'Transaction Successfully Updated';
                 } else {
                     $this->response['status'] = false;
                 }
@@ -308,7 +308,7 @@ class TransactionsController extends \BaseController {
                 $this->response['error']['message'] = 'Invalid Token';
                 return Response::json($this->response,$this->http_status);
             }
-            $posts = DB::table('transactions')->where('pr_encoder','=',$search->first_name)->get();
+            $posts = DB::table('transactions')->where('pr_encoder','=',$search->first_name)->where('status','=','1')->get();
             if(!empty($posts)){
                 foreach ($posts as $post) {
                     if($post->item_id==1){
