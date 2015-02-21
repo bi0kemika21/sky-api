@@ -158,8 +158,8 @@ class UsersController extends \BaseController {
             $data = Input::all();
             $this->user = User::find($id);
 
-            if (Input::has('password')) {
-        	    $pw = Input::get('password');
+            if (Input::has('old_password')) {
+        	    $pw = Input::get('old_password');
                 if (Hash::check($pw, $this->user->password) ) {
         		   $this->user->first_name = Input::get('first_name',$this->user->firstname);
             	   $this->user->last_name = Input::get('last_name',$this->user->lastname);
