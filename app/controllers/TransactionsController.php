@@ -195,12 +195,61 @@ class TransactionsController extends \BaseController {
             if(!$search) {
                 $this->response['status'] = false;
                 $this->response['error']['message'] = 'Invalid Token';
-
                 return Response::json($this->response,$this->http_status);
             }
 		    $transac = Transaction::find($id);
             if (!empty($transac)) {
                 $this->http_status = 200;
+                if($transac->item_id==1){
+                        $transac->item = "WITH MESS CABLE WIRE";
+                    }else if($transac->item_id==2){
+                        $transac->item = "NON MESS CABLE WIRE";
+                    }else if($transac->item_id==3){
+                        $transac->item = "F56 CABLE CONNECTOR";
+                    }else if($transac->item_id==4){
+                        $transac->item = "F59 CABLE CONNECTOR";
+                    }else if($transac->item_id==5){
+                        $transac->item = "F81 CABLE CONNECTOR";
+                    }else if($transac->item_id==6){
+                        $transac->item = "2 WAY SPITTER";
+                    }else if($transac->item_id==7){
+                        $transac->item = "P HOOK";
+                    }else if($transac->item_id==8){
+                        $transac->item = "S CLAMP";
+                    }else if($transac->item_id==9){
+                        $transac->item = "CABLE CLIP";
+                    }else if($transac->item_id==10){
+                        $transac->item = "GROUND WIRE";
+                    }else if($transac->item_id==11){
+                        $transac->item = "GROUND BLOCK";
+                    }else if($transac->item_id==12){
+                        $transac->item = "GROUND ROD";
+                    }else if($transac->item_id==13){
+                        $transac->item = "GROUND CLAMP";
+                    }else if($transac->item_id==14){
+                        $transac->item = "ISOLATOR";
+                    }else if($transac->item_id==15){
+                        $transac->item = "HIGH PASS FILTER";
+                    }else if($transac->item_id==16){
+                        $transac->item = "F 2 PAL";
+                    }else if($transac->item_id==17){
+                        $transac->item = "TUCKER WIRE";
+                    }else if($transac->item_id==18){
+                        $transac->item = "DIGI BOX";
+                    }else if($transac->item_id==19){
+                        $transac->item = "HD";
+                    }else if($transac->item_id==20){
+                        $transac->item = "MODEM";
+                    }else if($transac->item_id==21){
+                        $transac->item = "DIGI BOX";
+                    }else if($transac->item_id==22){
+                        $transac->item = "HD BOX";
+                    }else if($transac->item_id==23){
+                        $transac->item = "DIGI BOX";
+                    }else if($transac->item_id==24){
+                        $transac->item = "HD BOX";
+                    }
+                
                 $this->response['results'] = $transac->toArray();
                 $this->response['status'] = True;
             } else {
