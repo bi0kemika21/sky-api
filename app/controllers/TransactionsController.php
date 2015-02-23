@@ -367,7 +367,7 @@ class TransactionsController extends \BaseController {
                         $post->stat = "PR Checked";
                     }else if($post->status=="3"){
                         $post->stat = "Warehouse Checked";
-                    }else if($post->status=="0"){
+                    }else if($post->status=="4"){
                         $post->stat = "Failed to Comply";
                     }
                     $this->response['results'][] = $post;
@@ -455,7 +455,7 @@ class TransactionsController extends \BaseController {
                         $post->stat = "PR Checked";
                     }else if($post->status=="3"){
                         $post->stat = "Warehouse Checked";
-                    }else if($post->status=="0"){
+                    }else if($post->status=="4"){
                         $post->stat = "Failed to Comply";
                     }
                     $this->response['results'][] = $post;
