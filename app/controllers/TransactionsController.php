@@ -83,7 +83,6 @@ class TransactionsController extends \BaseController {
                     }else if($post->item_id==24){
                         $post->item = "HD BOX";
                     }
-    				$this->response['results'][] = $post;
                     if($post->status=="1"){
                         $post->stat = "Pending";
                     }else if($post->status=="2"){
@@ -93,6 +92,8 @@ class TransactionsController extends \BaseController {
                     }else if($post->status=="4"){
                         $post->stat = "Failed to Comply";
                     }
+    				$this->response['results'][] = $post;
+                    
     			}
     		} else {
     			$this->response['status'] = false;
@@ -448,8 +449,7 @@ class TransactionsController extends \BaseController {
                     }else if($post->item_id==24){
                         $post->item = "HD BOX";
                     }
-                    $this->response['results'][] = $post;
-                    if($post->status=="1"){
+                     if($post->status=="1"){
                         $post->stat = "Pending";
                     }else if($post->status=="2"){
                         $post->stat = "PR Checked";
@@ -458,6 +458,8 @@ class TransactionsController extends \BaseController {
                     }else if($post->status=="0"){
                         $post->stat = "Failed to Comply";
                     }
+                    $this->response['results'][] = $post;
+                   
                 }
             } else {
                 $this->response['status'] = false;
@@ -535,8 +537,7 @@ class TransactionsController extends \BaseController {
                     }else if($post->item_id==24){
                         $post->item = "HD BOX";
                     }
-                    $this->response['results'][] = $post;
-                    if($post->status=="1"){
+                     if($post->status=="1"){
                         $post->stat = "Pending";
                     }else if($post->status=="2"){
                         $post->stat = "PR Checked";
@@ -545,6 +546,8 @@ class TransactionsController extends \BaseController {
                     }else if($post->status=="4"){
                         $post->stat = "Failed to Comply";
                     }
+                    $this->response['results'][] = $post;
+                   
                 }
             } else {
                 $this->response['status'] = false;
