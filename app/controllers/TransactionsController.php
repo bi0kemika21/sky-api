@@ -620,7 +620,7 @@ class TransactionsController extends \BaseController {
 
     foreach($searchTerms as $term)
     {
-        $query->where($cat, 'LIKE', '%'.'cast($term as text)'.'%');
+        $query->where($cat, 'LIKE', '%'. $term .'%');
     }
 
     $results = $query->get();
