@@ -611,5 +611,30 @@ class TransactionsController extends \BaseController {
         }
         return Response::json($this->response,$this->http_status);
     }
+    public function search() {
+
+    $q = Input::get('que');
+    $cat = Input::get('category');
+    $searchTerms = explode(' ', $q);
+    $query = DB::table('transactions');
+
+    foreach($searchTerms as $term)
+    {
+        $query->where($cat, 'LIKE', '%'. $term .'%');
+    }
+
+    $results = $query->get();
+    if(!empty($results)){
+                foreach ($results as $res) {
+                    $this->response['results'][] = $res;
+            }
+            $this->http_status = 200;        
+            $this->response['status'] = True;
+    }else{
+        $this->response['status'] = false;
+        $this->response['error']['search'][] = "Query not found";
+    }
+    return Response::json($this->response,$this->http_status);
+    }
 }
     
