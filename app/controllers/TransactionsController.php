@@ -152,6 +152,7 @@ class TransactionsController extends \BaseController {
             $this->transactions->item_id = Input::get('item_id');
             $this->transactions->quantity = Input::get('quantity');
             $this->transactions->location = Input::get('location');
+            $this->transactions->unit = Input::get('unit');
             $this->transactions->status = "1";
             $this->transactions->pr_status = "0";
             $this->transactions->warehouse_status = "0";
